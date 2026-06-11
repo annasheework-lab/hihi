@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>អ្នកចាប់នំបញ្ចុក 🐉</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+Khmer:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:100%;height:100%;background:#060d1a;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -13,7 +13,7 @@
     width:100%;max-width:480px;height:100vh;max-height:700px;
     border-radius:16px;overflow:hidden;
     position:relative;background:#1a4a2e;
-    font-family:'Rajdhani',sans-serif;user-select:none;-webkit-user-select:none;
+    font-family:'Noto Sans Khmer','Rajdhani',sans-serif;user-select:none;-webkit-user-select:none;
     touch-action:manipulation;
     box-shadow:0 0 60px rgba(0,180,80,0.12);
   }
@@ -23,12 +23,12 @@
   .hl{font-size:9px;color:rgba(255,220,100,0.7);letter-spacing:1px;text-transform:uppercase;}
   .hv{font-size:22px;font-weight:700;color:#ffdc64;line-height:1.1;}
   .sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20;background:rgba(5,18,10,0.95);backdrop-filter:blur(4px);padding:24px;text-align:center;gap:14px;}
-  .sc h1{font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;color:#ffdc64;text-shadow:0 0 20px #ff9900;letter-spacing:2px;}
+  .sc h1{font-family:'Noto Sans Khmer','Rajdhani',sans-serif;font-size:30px;font-weight:700;color:#ffdc64;text-shadow:0 0 20px #ff9900;letter-spacing:2px;}
   .sc p{font-size:14px;color:rgba(255,255,255,0.82);line-height:1.6;max-width:320px;}
   .sc .sub{font-size:11px;color:rgba(255,220,100,0.6);letter-spacing:1px;}
-  .sbtn{background:#cc5500;color:#fff;border:none;border-radius:10px;padding:13px 40px;font-size:18px;font-weight:700;font-family:'Rajdhani',sans-serif;cursor:pointer;letter-spacing:1px;display:block;transition:opacity 0.2s;box-shadow:0 4px 16px rgba(200,80,0,0.4);}
+  .sbtn{background:#cc5500;color:#fff;border:none;border-radius:10px;padding:13px 40px;font-size:18px;font-weight:700;font-family:'Noto Sans Khmer','Rajdhani',sans-serif;cursor:pointer;letter-spacing:1px;display:block;transition:opacity 0.2s;box-shadow:0 4px 16px rgba(200,80,0,0.4);}
   .sbtn:disabled{opacity:0.5;cursor:not-allowed;}
-  .sbtn2{background:transparent;border:1px solid rgba(255,255,255,0.25);color:#fff;border-radius:10px;padding:8px 24px;font-size:13px;font-weight:600;font-family:'Rajdhani',sans-serif;cursor:pointer;}
+  .sbtn2{background:transparent;border:1px solid rgba(255,255,255,0.25);color:#fff;border-radius:10px;padding:8px 24px;font-size:13px;font-weight:600;font-family:'Noto Sans Khmer','Rajdhani',sans-serif;cursor:pointer;}
   .pbox{background:rgba(255,200,80,0.1);border:1.5px solid rgba(255,200,80,0.45);border-radius:12px;padding:14px 28px;min-width:220px;}
   .pbox .pe{font-size:36px;}
   .pbox .pt{font-size:22px;font-weight:700;color:#ffdc64;margin-top:6px;}
@@ -248,7 +248,7 @@ function drawពេលវេលាrArc(){
   tctx.strokeStyle=timeLeft<=5?'#ff4444':phase.color;
   tctx.lineWidth=3.5; tctx.lineCap='round'; tctx.stroke();
   tctx.fillStyle=timeLeft<=5?'#ff4444':'#ffdc64';
-  tctx.font='bold 13px Rajdhani,sans-serif';
+  tctx.font='bold 13px Noto Sans Khmer,Rajdhani,sans-serif';
   tctx.textAlign='center'; tctx.textBaseline='middle';
   tctx.fillText(Math.ceil(timeLeft),cx,cy);
 }
@@ -294,17 +294,17 @@ function drawBg(){
   });
   const wy=H*0.38;
   ctx.fillStyle='#0b4060'; ctx.fillRect(0,wy,W,H-wy);
-  for(let i=0;i<5;i++){
+  for(let i=0;i<3;i++){
     ctx.beginPath();
-    const y2=wy+18+i*28;
-    for(let x=0;x<=W;x+=5){
+    const y2=wy+18+i*40;
+    for(let x=0;x<=W;x+=15){
       const yy=y2+Math.sin((x+waveOff*(1+i*0.15))/38+i)*4;
       x===0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);
     }
-    ctx.strokeStyle=`rgba(255,255,255,${0.04+i*0.012})`; ctx.lineWidth=1; ctx.stroke();
+    ctx.strokeStyle=`rgba(255,255,255,${0.05+i*0.02})`; ctx.lineWidth=1; ctx.stroke();
   }
-  for(let b=0;b<3;b++){
-    const bx=(b+0.5)*(W/3)+(b%2===0?-15:15);
+  for(let b=0;b<2;b++){
+    const bx=(b+0.5)*(W/2)+(b%2===0?-15:15);
     for(let s=0;s<4;s++){
       const sy1=H*0.38-s*50, sy2=H*0.38-(s+0.78)*50;
       ctx.strokeStyle='#2d7a20'; ctx.lineWidth=9;
@@ -316,15 +316,15 @@ function drawBg(){
     ctx.beginPath(); ctx.ellipse(bx+18,H*0.38-190,18,6,-0.4,0,Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.ellipse(bx-16,H*0.38-150,16,5,0.4,0,Math.PI*2); ctx.fill();
   }
-  for(let i=0;i<4;i++){
-    const lx=(W/4)*(i+0.5)+Math.sin(frameCount/55+i)*12;
+  for(let i=0;i<2;i++){
+    const lx=(W/2)*(i+0.5)+Math.sin(frameCount/55+i)*12;
     const ly=H*0.44+i*6;
     ctx.beginPath(); ctx.ellipse(lx,ly,17,7,0,0,Math.PI*2);
     ctx.fillStyle='#1a6b2e'; ctx.fill();
     ctx.strokeStyle='#2d8a3e'; ctx.lineWidth=1; ctx.stroke();
   }
-  for(let i=0;i<5;i++){
-    const lx=(W/5)*i+W/10, ly=45+Math.sin(frameCount/28+i)*3;
+  for(let i=0;i<3;i++){
+    const lx=(W/3)*i+W/6, ly=45+Math.sin(frameCount/28+i)*3;
     ctx.fillStyle='#cc2200';
     ctx.beginPath(); ctx.ellipse(lx,ly,8,12,0,0,Math.PI*2); ctx.fill();
     ctx.strokeStyle='rgba(255,180,0,0.25)'; ctx.lineWidth=14;
@@ -436,7 +436,7 @@ function drawFloatTexts(dt){
     ctx.save();
     ctx.globalAlpha=Math.max(0,f.life);
     ctx.fillStyle=f.color;
-    ctx.font='bold 19px Rajdhani,sans-serif';
+    ctx.font='bold 18px Noto Sans Khmer,Rajdhani,sans-serif';
     ctx.textAlign='center';
     ctx.textBaseline='middle';
     ctx.fillText(f.txt,f.x,f.y);
