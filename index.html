@@ -415,25 +415,33 @@ function drawItem(it){
 }
 
 function spawnParticles(x,y,color,n){
+  if(particles.length>60) return; // cap particles
   for(let i=0;i<n;i++){
     const a=Math.random()*Math.PI*2, spd=2+Math.random()*4;
     particles.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-2,r:2+Math.random()*3,color,life:40,maxLife:40});
   }
 }
 
+// Float texts array for canvas rendering (no DOM)
+let floatTexts = [];
 function showFloat(txt,x,y,color){
-  const d=document.createElement('div');
-  d.style.cssText=`position:absolute;left:${Math.round(x)}px;top:${Math.round(y)}px;color:${color};font-size:19px;font-weight:700;font-family:Rajdhani,sans-serif;pointer-events:none;z-index:15;transform:translate(-50%,-50%);white-space:nowrap;`;
-  d.textContent=txt; gwEl.appendChild(d);
-  let t0=null;
-  function anim(ts){
-    if(!t0) t0=ts;
-    const p=(ts-t0)/800;
-    d.style.opacity=String(1-p);
-    d.style.top=Math.round(y-50*p)+'px';
-    if(p<1) requestAnimationFrame(anim); else d.remove();
+  floatTexts.push({txt,x,y,color,life:1.0,vy:0});
+}
+function drawFloatTexts(dt){
+  for(let i=floatTexts.length-1;i>=0;i--){
+    const f=floatTexts[i];
+    f.life-=dt*1.2;
+    f.y-=50*dt;
+    if(f.life<=0){floatTexts.splice(i,1);continue;}
+    ctx.save();
+    ctx.globalAlpha=Math.max(0,f.life);
+    ctx.fillStyle=f.color;
+    ctx.font='bold 19px Rajdhani,sans-serif';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(f.txt,f.x,f.y);
+    ctx.restore();
   }
-  requestAnimationFrame(anim);
 }
 
 let phaseFlash=0;
@@ -487,7 +495,7 @@ function loop(timestamp){
       if(it.type==='bomb'){
         score=Math.max(0,score-SC.bomb);
         combo=1;
-        spawnParticles(it.x,it.y,'#ff4444',16);
+        spawnParticles(it.x,it.y,'#ff4444',8);
         showFloat(`💥 -${SC.bomb}`,it.x,it.y,'#ff6666');
         updateUI();
         phaseFlash=Math.max(phaseFlash,6);
@@ -497,7 +505,7 @@ function loop(timestamp){
         if(add>0){
           score+=add;
           combo=Math.min(combo+1,8);
-          spawnParticles(it.x,it.y,it.type==='gold'?'#ffdc64':'#44cc66',10);
+          spawnParticles(it.x,it.y,it.type==='gold'?'#ffdc64':'#44cc66',6);
           showFloat('+'+add,it.x,it.y,it.type==='gold'?'#ffdc64':'#aaffaa');
           updateUI();
           if(combo>=3){
@@ -552,7 +560,7 @@ function startGame(){
   document.getElementById('phase-bar').style.display='block';
   document.getElementById('phase-label').style.display='block';
   score=0; combo=1;
-  items=[]; particles=[]; frameCount=0; spawnAccum=0; lastពេលវេលាstamp=0;
+  items=[]; particles=[]; floatTexts=[]; frameCount=0; spawnAccum=0; lastពេលវេលាstamp=0;
   mouseX=W/2; boat.x=W/2;
   currentPhaseIdx=0; phaseFlash=0;
   gameStartពេលវេលា=Date.now(); elapsedSec=0;
