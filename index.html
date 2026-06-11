@@ -204,7 +204,7 @@ function showInvalid(msg) {
 let score=0, combo=1;
 let running=false, gameActive=false;
 let raf=null, frameCount=0;
-let lastពេលវេលាstamp=0, spawnAccum=0;
+let lastTimestamp=0, spawnAccum=0;
 let mouseX=300;
 let boat={x:300, y:500, w:110, h:48};
 let items=[], particles=[];
@@ -453,8 +453,8 @@ function triggerPhaseFlash(phaseIdx){
 
 function loop(timestamp){
   if(!gameActive) return;
-  const dt=Math.min((timestamp-(lastពេលវេលាstamp||timestamp))/1000,0.1);
-  lastពេលវេលាstamp=timestamp;
+  const dt=Math.min((timestamp-(lastTimestamp||timestamp))/1000,0.1);
+  lastTimestamp=timestamp;
   ctx.clearRect(0,0,W,H);
   frameCount++;
   waveOff+=36*dt;
@@ -542,8 +542,8 @@ function loop(timestamp){
 
 function idleLoop(timestamp){
   if(gameActive) return;
-  const dt=Math.min((timestamp-(lastពេលវេលាstamp||timestamp))/1000,0.1);
-  lastពេលវេលាstamp=timestamp;
+  const dt=Math.min((timestamp-(lastTimestamp||timestamp))/1000,0.1);
+  lastTimestamp=timestamp;
   ctx.clearRect(0,0,W,H);
   waveOff+=36*dt; frameCount++;
   drawBg();
@@ -560,7 +560,7 @@ function startGame(){
   document.getElementById('phase-bar').style.display='block';
   document.getElementById('phase-label').style.display='block';
   score=0; combo=1;
-  items=[]; particles=[]; floatTexts=[]; frameCount=0; spawnAccum=0; lastពេលវេលាstamp=0;
+  items=[]; particles=[]; floatTexts=[]; frameCount=0; spawnAccum=0; lastTimestamp=0;
   mouseX=W/2; boat.x=W/2;
   currentPhaseIdx=0; phaseFlash=0;
   gameStartពេលវេលា=Date.now(); elapsedSec=0;
@@ -612,7 +612,7 @@ function endGame(){
     pb.classList.add('hidden'); bc.style.display='none';
   }
   scOver.classList.remove('hidden');
-  lastពេលវេលាstamp=0;
+  lastTimestamp=0;
   raf=requestAnimationFrame(idleLoop);
 }
 
