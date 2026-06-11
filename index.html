@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Dumpling Catcher 🐉</title>
+<title>អ្នកចាប់នំបញ្ចុក 🐉</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -52,9 +52,9 @@
   <canvas id="c"></canvas>
 
   <div id="ui" class="hidden">
-    <div class="hb"><div class="hl">Score</div><div class="hv" id="hv-score">0</div></div>
-    <div class="hb"><div class="hl">Time</div><canvas id="timer-canvas" width="44" height="44"></canvas></div>
-    <div class="hb"><div class="hl">Combo</div><div class="hv" id="hv-combo">x1</div></div>
+    <div class="hb"><div class="hl">ពិន្ទុ</div><div class="hv" id="hv-score">0</div></div>
+    <div class="hb"><div class="hl">ពេលវេលា</div><canvas id="timer-canvas" width="44" height="44"></canvas></div>
+    <div class="hb"><div class="hl">កុំបូ</div><div class="hv" id="hv-combo">x1</div></div>
   </div>
 
   <div id="combo-pop"></div>
@@ -64,47 +64,47 @@
   <!-- LOADING SCREEN -->
   <div class="sc" id="sc-loading">
     <div class="spin"></div>
-    <p style="color:rgba(255,220,100,0.7);font-size:13px;letter-spacing:1px;">Verifying your link...</p>
+    <p style="color:rgba(255,220,100,0.7);font-size:13px;letter-spacing:1px;">កំពុងផ្ទៀងផ្ទាត់...</p>
   </div>
 
   <!-- INVALID SCREEN -->
   <div class="sc hidden" id="sc-invalid">
     <div style="font-size:48px">🚫</div>
-    <h1 style="color:#ff6666">Invalid Link</h1>
-    <p id="invalid-msg">This link has expired or already been used.</p>
-    <p class="sub">Please contact customer support for a new link.</p>
+    <h1 style="color:#ff6666">តំណភ្ជាប់មិនត្រឹមត្រូវ</h1>
+    <p id="invalid-msg">តំណភ្ជាប់នេះត្រូវបានប្រើរួចហើយ។</p>
+    <p class="sub">សូមទាក់ទងផ្នែកសេវាកម្មអតិថិជន។</p>
   </div>
 
   <!-- START SCREEN -->
   <div class="sc hidden" id="sc-start">
     <div style="font-size:50px">🐉🟢🎋</div>
-    <h1>DUMPLING CATCHER</h1>
+    <h1>អ្នកចាប់នំបញ្ចុក</h1>
     <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
       <p id="welcome-txt" style="font-size:15px;color:#fff;"></p>
-      <div class="lvl-badge" id="level-badge">⭐ LEVEL 1</div>
+      <div class="lvl-badge" id="level-badge">⭐ កម្រិត 1</div>
     </div>
     <div class="legend">
-      <div class="leg-item"><span style="font-size:18px">🟢</span> <span id="leg-normal">Dumpling +1</span></div>
-      <div class="leg-item"><span style="font-size:18px">⭐</span> <span id="leg-gold">Golden +5</span></div>
-      <div class="leg-item"><span style="font-size:18px">💣</span> <span id="leg-bomb">Bomb -10pts</span></div>
+      <div class="leg-item"><span style="font-size:18px">🟢</span> <span id="leg-normal">នំបញ្ចុក +1</span></div>
+      <div class="leg-item"><span style="font-size:18px">⭐</span> <span id="leg-gold">នំមាស +5</span></div>
+      <div class="leg-item"><span style="font-size:18px">💣</span> <span id="leg-bomb">គ្រាប់បែក -10ពិន្ទុ</span></div>
     </div>
     <p id="max-hint" class="sub"></p>
-    <p style="font-size:13px;color:rgba(255,255,255,0.6);">Move mouse / touch to control the boat<br>Catch dumplings to win cash rewards!</p>
-    <button class="sbtn" id="btn-start">START GAME ▶</button>
+    <p style="font-size:13px;color:rgba(255,255,255,0.6);">ប្រើកណ្ដុរ / ប៉ះអេក្រង់ដើម្បីបញ្ជាទូក<br>ចាប់នំបញ្ចុកដើម្បីឈ្នះរង្វាន់!</p>
+    <button class="sbtn" id="btn-start">ចាប់ផ្តើមលេង ▶</button>
   </div>
 
-  <!-- GAME OVER SCREEN -->
+  <!-- ហ្គេមបញ្ចប់ SCREEN -->
   <div class="sc hidden" id="sc-over">
     <div style="font-size:46px" id="over-emoji">😓</div>
-    <h1 id="over-title">GAME OVER</h1>
+    <h1 id="over-title">ហ្គេមបញ្ចប់</h1>
     <div class="pbox hidden" id="prize-box">
       <div class="pe">💰</div>
       <div class="pt" id="prize-text">$0</div>
-      <div class="psub">Cash Reward — Ready to Claim!</div>
+      <div class="psub">រង្វាន់សាច់ប្រាក់ — រួចរាល់ទទួល!</div>
     </div>
     <p id="over-stat" style="font-size:13px;color:rgba(255,220,100,0.7);"></p>
-    <button class="sbtn" id="btn-claim" style="display:none;margin:0 auto;">CLAIM REWARD →</button>
-    <button class="sbtn2" id="btn-retry" style="margin:4px auto;">Play Again 🔄</button>
+    <button class="sbtn" id="btn-claim" style="display:none;margin:0 auto;">ទទួលរង្វាន់ →</button>
+    <button class="sbtn2" id="btn-retry" style="margin:4px auto;">លេងម្តងទៀត 🔄</button>
   </div>
 </div>
 
@@ -139,9 +139,9 @@ let claimed = false;
 // ============================================================
 const GAME_DURATION = 30;
 const PHASES = [
-  { name:'WARM UP',    nameEn:'WARM UP',    zongzi:0.75, gold:0.00, bomb:0.25, spawnBase:0.55, speedMult:1.65, color:'#44cc66' },
-  { name:'HEATING UP', nameEn:'HEATING UP', zongzi:0.63, gold:0.12, bomb:0.25, spawnBase:0.42, speedMult:2.1,  color:'#ffdc64' },
-  { name:'FINAL RUSH', nameEn:'FINAL RUSH', zongzi:0.55, gold:0.17, bomb:0.28, spawnBase:0.28, speedMult:2.7,  color:'#ff6644' },
+  { name:'ត្រៀមខ្លួន',    nameEn:'ត្រៀមខ្លួន',    zongzi:0.75, gold:0.00, bomb:0.25, spawnBase:0.55, speedMult:1.65, color:'#44cc66' },
+  { name:'កំពុងក្តៅ', nameEn:'កំពុងក្តៅ', zongzi:0.63, gold:0.12, bomb:0.25, spawnBase:0.42, speedMult:2.1,  color:'#ffdc64' },
+  { name:'រត់ចុងក្រោយ', nameEn:'រត់ចុងក្រោយ', zongzi:0.55, gold:0.17, bomb:0.28, spawnBase:0.28, speedMult:2.7,  color:'#ff6644' },
 ];
 
 // ============================================================
@@ -162,13 +162,13 @@ const scOver    = document.getElementById('sc-over');
 // INIT — validate token
 // ============================================================
 window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('leg-normal').textContent = `Dumpling +${SC.normal}`;
-  document.getElementById('leg-gold').textContent   = `Golden +${SC.gold}`;
-  document.getElementById('leg-bomb').textContent   = `Bomb -${SC.bomb}pts`;
-  document.getElementById('max-hint').textContent   = `1 pt = $1 cash reward`;
+  document.getElementById('leg-normal').textContent = `នំបញ្ចុក +${SC.normal}`;
+  document.getElementById('leg-gold').textContent   = `នំមាស +${SC.gold}`;
+  document.getElementById('leg-bomb').textContent   = `គ្រាប់បែក -${SC.bomb}ពិន្ទុ`;
+  document.getElementById('max-hint').textContent   = `1ពិន្ទុ = $1រង្វាន់សាច់ប្រាក់`;
 
   if (!TOKEN) {
-    showInvalid('Invalid link: missing token.');
+    showInvalid('តំណភ្ជាប់មិនត្រឹមត្រូវ: គ្មាន token។');
     return;
   }
 
@@ -177,18 +177,18 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       scLoading.classList.add('hidden');
       if (data.status === 'used') {
-        showInvalid('This link has already been used. Reward claimed. ✅');
+        showInvalid('តំណភ្ជាប់នេះបានប្រើរួចហើយ។ រង្វាន់បានទទួល។ ✅');
       } else if (data.status === 'invalid') {
-        showInvalid('Invalid link. Please contact customer support.');
+        showInvalid('តំណភ្ជាប់មិនត្រឹមត្រូវ។ សូមទាក់ទងផ្នែកជំនួយ។');
       } else {
-        const uname = data.username || USERNAME || 'Player';
-        document.getElementById('welcome-txt').textContent = `👋 Welcome, ${uname}!`;
-        document.getElementById('level-badge').textContent = `⭐ LEVEL ${data.level || LEVEL}`;
+        const uname = data.username || USERNAME || 'អ្នកលេង';
+        document.getElementById('welcome-txt').textContent = `👋 សូមស្វាគមន៍, ${uname}!`;
+        document.getElementById('level-badge').textContent = `⭐ កម្រិត ${data.level || LEVEL}`;
         scStart.classList.remove('hidden');
       }
     })
     .catch(() => {
-      showInvalid('Unable to verify link. Please check your connection or contact support.');
+      showInvalid('មិនអាចផ្ទៀងផ្ទាត់តំណភ្ជាប់។ សូមពិនិត្យការតភ្ជាប់ឬទាក់ទងផ្នែកជំនួយ។');
     });
 });
 
@@ -204,12 +204,12 @@ function showInvalid(msg) {
 let score=0, combo=1;
 let running=false, gameActive=false;
 let raf=null, frameCount=0;
-let lastTimestamp=0, spawnAccum=0;
+let lastពេលវេលាstamp=0, spawnAccum=0;
 let mouseX=300;
 let boat={x:300, y:500, w:110, h:48};
 let items=[], particles=[];
 let waveOff=0, clouds=[];
-let gameStartTime=0, elapsedSec=0, currentPhaseIdx=0;
+let gameStartពេលវេលា=0, elapsedSec=0, currentPhaseIdx=0;
 let W=0, H=0;
 
 function resize(){
@@ -235,7 +235,7 @@ function updateUI(){
   document.getElementById('hv-combo').textContent = 'x'+combo;
 }
 
-function drawTimerArc(){
+function drawពេលវេលាrArc(){
   const cx=22,cy=22,r=17;
   const timeLeft = Math.max(0, GAME_DURATION - elapsedSec);
   const frac = timeLeft / GAME_DURATION;
@@ -445,14 +445,14 @@ function triggerPhaseFlash(phaseIdx){
 
 function loop(timestamp){
   if(!gameActive) return;
-  const dt=Math.min((timestamp-(lastTimestamp||timestamp))/1000,0.1);
-  lastTimestamp=timestamp;
+  const dt=Math.min((timestamp-(lastពេលវេលាstamp||timestamp))/1000,0.1);
+  lastពេលវេលាstamp=timestamp;
   ctx.clearRect(0,0,W,H);
   frameCount++;
   waveOff+=36*dt;
   drawBg();
 
-  elapsedSec=(Date.now()-gameStartTime)/1000;
+  elapsedSec=(Date.now()-gameStartពេលវេលា)/1000;
   if(elapsedSec>=GAME_DURATION){ endGame(); return; }
 
   const newPhaseIdx=getPhase();
@@ -492,8 +492,8 @@ function loop(timestamp){
         updateUI();
         phaseFlash=Math.max(phaseFlash,6);
       } else {
-        const pts=it.type==='gold'?SC.gold:SC.normal;
-        const add=Math.min(pts, SC.max-score);
+        const ពិន្ទុ=it.type==='gold'?SC.gold:SC.normal;
+        const add=Math.min(ពិន្ទុ, SC.max-score);
         if(add>0){
           score+=add;
           combo=Math.min(combo+1,8);
@@ -502,8 +502,8 @@ function loop(timestamp){
           updateUI();
           if(combo>=3){
             const cp=document.getElementById('combo-pop');
-            cp.textContent=combo+'x COMBO! 🔥'; cp.style.opacity='1';
-            clearTimeout(cp._t); cp._t=setTimeout(()=>{cp.style.opacity='0';},1100);
+            cp.textContent=combo+'x កុំបូ! 🔥'; cp.style.opacity='1';
+            clearពេលវេលាout(cp._t); cp._t=setពេលវេលាout(()=>{cp.style.opacity='0';},1100);
           }
         }
       }
@@ -527,15 +527,15 @@ function loop(timestamp){
     if(p.life<=0) particles.splice(i,1);
   }
 
-  drawTimerArc();
+  drawពេលវេលាrArc();
   updatePhaseBar();
   raf=requestAnimationFrame(loop);
 }
 
 function idleLoop(timestamp){
   if(gameActive) return;
-  const dt=Math.min((timestamp-(lastTimestamp||timestamp))/1000,0.1);
-  lastTimestamp=timestamp;
+  const dt=Math.min((timestamp-(lastពេលវេលាstamp||timestamp))/1000,0.1);
+  lastពេលវេលាstamp=timestamp;
   ctx.clearRect(0,0,W,H);
   waveOff+=36*dt; frameCount++;
   drawBg();
@@ -545,17 +545,17 @@ function idleLoop(timestamp){
 }
 
 function startGame(){
-  if(claimed){ showInvalid('Reward already claimed. ✅'); return; }
+  if(claimed){ showInvalid('រង្វាន់បានទទួលរួចហើយ។ ✅'); return; }
   scStart.classList.add('hidden');
   scOver.classList.add('hidden');
   document.getElementById('ui').classList.remove('hidden');
   document.getElementById('phase-bar').style.display='block';
   document.getElementById('phase-label').style.display='block';
   score=0; combo=1;
-  items=[]; particles=[]; frameCount=0; spawnAccum=0; lastTimestamp=0;
+  items=[]; particles=[]; frameCount=0; spawnAccum=0; lastពេលវេលាstamp=0;
   mouseX=W/2; boat.x=W/2;
   currentPhaseIdx=0; phaseFlash=0;
-  gameStartTime=Date.now(); elapsedSec=0;
+  gameStartពេលវេលា=Date.now(); elapsedSec=0;
   gameActive=true; running=true;
   updateUI();
   if(raf) cancelAnimationFrame(raf);
@@ -573,8 +573,8 @@ function endGame(){
   const won = finalScore > 0;
 
   document.getElementById('over-emoji').textContent = finalScore>=SC.max?'🏆':finalScore>0?'🎉':'😓';
-  document.getElementById('over-title').textContent = finalScore>=SC.max?'PERFECT SCORE!':finalScore>0?'GAME OVER':'TRY AGAIN!';
-  document.getElementById('over-stat').textContent = `Final Score: ${finalScore} pts · Reward: $${finalScore}`;
+  document.getElementById('over-title').textContent = finalScore>=SC.max?'ពិន្ទុពេញ!':finalScore>0?'ហ្គេមបញ្ចប់':'សាកម្តងទៀត!';
+  document.getElementById('over-stat').textContent = `ពិន្ទុចុងក្រោយ: ${finalScore} · រង្វាន់: $${finalScore}`;
 
   const pb=document.getElementById('prize-box');
   const bc=document.getElementById('btn-claim');
@@ -583,20 +583,20 @@ function endGame(){
     pb.classList.remove('hidden');
     document.getElementById('prize-text').textContent=`$${finalScore}`;
     bc.style.display='block';
-    bc.textContent='Processing...'; bc.disabled=true;
+    bc.textContent='កំពុងដំណើរការ...'; bc.disabled=true;
 
     // AUTO-RECORD to Sheet immediately when game ends
     fetch(`${SCRIPT_URL}?action=claim&token=${TOKEN}&reward=${finalScore}`)
       .then(r=>r.json())
       .then(data=>{
         claimed=true;
-        bc.textContent='CLAIM REWARD →';
+        bc.textContent='ទទួលរង្វាន់ →';
         bc.disabled=false;
         bc.dataset.score = finalScore;
       })
       .catch(()=>{
         claimed=true;
-        bc.textContent='CLAIM REWARD →';
+        bc.textContent='ទទួលរង្វាន់ →';
         bc.disabled=false;
         bc.dataset.score = finalScore;
       });
@@ -604,7 +604,7 @@ function endGame(){
     pb.classList.add('hidden'); bc.style.display='none';
   }
   scOver.classList.remove('hidden');
-  lastTimestamp=0;
+  lastពេលវេលាstamp=0;
   raf=requestAnimationFrame(idleLoop);
 }
 
@@ -614,7 +614,7 @@ function endGame(){
 document.getElementById('btn-claim').addEventListener('click', function(){
   if(!claimed) return;
   const btn = this;
-  btn.textContent='✅ Reward Claimed!';
+  btn.textContent='✅ បានទទួលរង្វាន់!';
   btn.disabled=true;
   document.getElementById('btn-retry').style.display='none';
 });
