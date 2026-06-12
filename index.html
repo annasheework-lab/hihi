@@ -209,7 +209,7 @@ let mouseX=300;
 let boat={x:300, y:500, w:110, h:48};
 let items=[], particles=[];
 let waveOff=0, clouds=[];
-let gameStartពេលវេលា=0, elapsedSec=0, currentPhaseIdx=0;
+let gameStartTime=0, elapsedSec=0, currentPhaseIdx=0;
 let W=0, H=0;
 
 function resize(){
@@ -235,7 +235,7 @@ function updateUI(){
   document.getElementById('hv-combo').textContent = 'x'+combo;
 }
 
-function drawពេលវេលាrArc(){
+function drawTimerArc(){
   const cx=22,cy=22,r=17;
   const timeLeft = Math.max(0, GAME_DURATION - elapsedSec);
   const frac = timeLeft / GAME_DURATION;
@@ -460,7 +460,7 @@ function loop(timestamp){
   waveOff+=36*dt;
   drawBg();
 
-  elapsedSec=(Date.now()-gameStartពេលវេលា)/1000;
+  elapsedSec=(Date.now()-gameStartTime)/1000;
   if(elapsedSec>=GAME_DURATION){ endGame(); return; }
 
   const newPhaseIdx=getPhase();
@@ -511,7 +511,7 @@ function loop(timestamp){
           if(combo>=3){
             const cp=document.getElementById('combo-pop');
             cp.textContent=combo+'x កុំបូ! 🔥'; cp.style.opacity='1';
-            clearពេលវេលាout(cp._t); cp._t=setពេលវេលាout(()=>{cp.style.opacity='0';},1100);
+            clearTimeout(cp._t); cp._t=setTimeout(()=>{cp.style.opacity='0';},1100);
           }
         }
       }
@@ -535,7 +535,7 @@ function loop(timestamp){
     if(p.life<=0) particles.splice(i,1);
   }
 
-  drawពេលវេលាrArc();
+  drawTimerArc();
   updatePhaseBar();
   raf=requestAnimationFrame(loop);
 }
@@ -563,7 +563,7 @@ function startGame(){
   items=[]; particles=[]; floatTexts=[]; frameCount=0; spawnAccum=0; lastTimestamp=0;
   mouseX=W/2; boat.x=W/2;
   currentPhaseIdx=0; phaseFlash=0;
-  gameStartពេលវេលា=Date.now(); elapsedSec=0;
+  gameStartTime=Date.now(); elapsedSec=0;
   gameActive=true; running=true;
   updateUI();
   if(raf) cancelAnimationFrame(raf);
